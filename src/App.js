@@ -10,7 +10,6 @@ import {
 import Home from "./routes/Home";
 import Login from "./routes/Login";
 
-
 function App() {
   return (
     <Router>
