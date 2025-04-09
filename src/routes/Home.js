@@ -1,21 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { auth } from './firebase'
 
 import TestDocHook from './components/TestDocHook'
 import TestFunctionCall from './components/TestFunctionCall';
-
-
+import RegisterHelmet from './components/RegisterHelmet';
+import GetUserHelmets from './components/GetUserHelmets';
 
 function Home() {
+  const [username, setUsername] = useState(null);
+  const [uid, setUid] = useState(null);
 
-    const username = auth.currentUser.displayName;
+  auth.onAuthStateChanged(function(user) {
+    if (user !== null) {
+      
+      setUsername(user.displayName);
+      setUid(user.uid);
+
+    } else {
+      setUsername("Unknown");
+    }
+  });
+
+
 
   return (
     <div>
-        <p>Welcome {username}</p>
-        <TestFunctionCall />
-        <TestDocHook />
+      <p>Welcome {username} uid: {uid}</p>
+      <TestFunctionCall />
+      <TestDocHook />
+      <RegisterHelmet />
+      <GetUserHelmets />
+
     </div>
   )
 }
