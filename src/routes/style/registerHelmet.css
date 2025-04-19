@@ -1,0 +1,52 @@
+.register-helmet-container {
+    margin-top: 30px;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .register-toggle-btn,
+  .register-cancel-btn,
+  .register-submit-btn {
+    background-color: #81c784;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .register-toggle-btn:hover,
+  .register-submit-btn:hover {
+    background-color: #388e3c;
+  }
+  
+  .register-cancel-btn {
+    background-color: #ef9a9a;
+  }
+  
+  .register-cancel-btn:hover {
+    background-color: #d32f2f;
+  }
+  
+  .register-form {
+    margin-top: 10px;
+  }
+  
+  .register-input {
+    padding: 10px;
+    font-size: 16px;
+    width: 240px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+  }
+  
+  .register-result {
+    margin-top: 20px;
+    color: #2e7d32;
+    font-weight: 500;
+  }
+  

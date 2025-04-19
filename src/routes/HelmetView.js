@@ -1,16 +1,13 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import {firestore} from './firebase';
+import { firestore } from './firebase';
 
 import React from 'react';
 
 import { collection } from 'firebase/firestore';
 import { useCollection } from 'react-firebase-hooks/firestore';
-// import {useState, useEffect} from 'react';
 
-// import { functions } from './firebase';
-// import { httpsCallable } from 'firebase/functions';
-
+import './style/helmet.css'
 
 function HelmetView() {
     const navigate = useNavigate();
@@ -23,43 +20,43 @@ function HelmetView() {
         snapshotListenOptions: { includeMetadataChanges: true },
     });
         
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error: {error.message}</p>;
+    if (loading) return <p className='helmet-loading'>Loading...</p>;
+    if (error) return <p className='helmet-error'>Error: {error.message}</p>;
 
     console.log(data);
 
-    // const [sessions, setSessions] = useState([]);
-
-    // useEffect(() => {
-    //     async function fetchData() {
-    //         const getSessions = httpsCallable(functions, 'getHelmetSessions');
-    //         const result = await getSessions({helmetNum: helmetNo})
-    //         console.log(result.data);
-    //         const arr = result.data.sessions;
-    //         setSessions(arr.map(e => <li><button onClick={() => {navigate('/session', {state: {helmetNo, sessionNo: e}})}}>{e}</button></li>));
-    //     }
-    //     fetchData();
-
-    // // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, []);
-
-
-
-
     return (
-        // <div>
-        //     <h2>Helmet: {helmetNo}</h2> <br />
-        //     {sessions}
-        
-        // </div>
-        <div>
-            <h2>Helmet: {helmetNo}</h2>
-            {data.docs.map((doc) => (
-              <button key={doc.data().sessNo} onClick={() => {navigate('/session', {state: {helmetNo, sessionNo: doc.data().sessNo}})}}>{doc.data().sessNo}</button>
+        <div className='helmet-view-wrapper'>
+          <button className='helmet-to-home' onClick={() => navigate('/home')}>Back to Home</button>
+      
+          <div className='helmet-header'>
+            <h2>Helmet {helmetNo}</h2>
+          </div>
+          
+          <div className='session-button-group'>
+          {[...data.docs]
+            .sort((a, b) => {
+                const aNum = parseInt(a.data().sessNo.replace(/[^\d]/g, '')) || 0;
+                const bNum = parseInt(b.data().sessNo.replace(/[^\d]/g, '')) || 0;
+                return aNum - bNum;
+            })
+            .map((doc) => (
+                <button
+                className='session-button'
+                key={doc.data().sessNo}
+                onClick={() =>
+                    navigate('/session', {
+                    state: { helmetNo, sessionNo: doc.data().sessNo },
+                    })
+                }>
+                {doc.data().sessNo}
+                </button>
             ))}
+
+          </div>
         </div>
-        
-    )
+      );
+      
 }
 
 export default HelmetView;

@@ -2,20 +2,23 @@ import React, { useState } from 'react'
 
 import { auth } from './firebase'
 
-import TestDocHook from './components/TestDocHook'
-import TestFunctionCall from './components/TestFunctionCall';
 import RegisterHelmet from './components/RegisterHelmet';
 import GetUserHelmets from './components/GetUserHelmets';
 
+import {  useNavigate } from 'react-router-dom';
+
+import './style/home.css';
+
 function Home() {
+
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState(null);
-  const [uid, setUid] = useState(null);
 
   auth.onAuthStateChanged(function(user) {
     if (user !== null) {
       
       setUsername(user.displayName);
-      setUid(user.uid);
 
     } else {
       setUsername("Unknown");
@@ -25,15 +28,18 @@ function Home() {
 
 
   return (
-    <div>
-      <p>Welcome {username} uid: {uid}</p>
-      <TestFunctionCall />
-      <TestDocHook />
-      <RegisterHelmet />
-      <GetUserHelmets />
-
+    <div className='home-wrapper'>
+      <div className='home-container'>
+        <p className='welcome-text'>
+          Welcome {username}{" "}
+          <button className='log-out' onClick={() => navigate('/')}>Log Out</button>
+        </p>
+        <RegisterHelmet />
+        <GetUserHelmets />
+      </div>
     </div>
-  )
+  );
+  
 }
 
 export default Home
