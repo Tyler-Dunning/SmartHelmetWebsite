@@ -62,4 +62,43 @@
     color: #757575;
     font-size: 18px;
   }
+
+  .severity-low {
+    background-color: #d4edda;
+    border-left: 6px solid #28a745;
+  }
+  
+  .severity-medium {
+    background-color: #fff3cd;
+    border-left: 6px solid #ffc107;
+  }
+  
+  .severity-high {
+    background-color: #f8d7da;
+    border-left: 6px solid #dc3545;
+  }
+
+  .session-data-item {
+    cursor: pointer;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+  
+  .session-data-item.expanded {
+    max-height: 340px;
+  }
+  
+  .raw-data {
+    margin-top: 1rem;
+    background: #fff;
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: #333;
+    overflow-x: auto;
+  }
+  
   
