@@ -87,9 +87,6 @@
     overflow: hidden;
   }
   
-  .session-data-item.expanded {
-    max-height: 340px;
-  }
   
   .raw-data {
     margin-top: 1rem;

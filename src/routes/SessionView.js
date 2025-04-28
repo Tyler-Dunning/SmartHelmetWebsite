@@ -35,7 +35,7 @@ function HelmetView() {
       <ul className="session-data-list">
         {value.docs.map((doc) => {
           const data = doc.data();
-          const { accMag, gyroMag, severity, content } = data['res'];
+          const { accMag, gyroMag, severity, content, type } = data['res'];
 
           const isExpanded = expandedId === doc.id;
 
@@ -52,6 +52,8 @@ function HelmetView() {
               onClick={() => setExpandedId(isExpanded ? null : doc.id)}
             >
               <div><h2>{severity} Severity</h2></div>
+              {type && <div><strong>Strike Type:</strong> {type}</div>}
+              {type && <br />}
               <div><strong>Acceleration Magnitude:</strong> {Math.round(accMag)}</div>
               <div><strong>Gyroscope Magnitude:</strong> {Math.round(gyroMag)}</div>
               {!isExpanded && <p>Click to see more</p>}
