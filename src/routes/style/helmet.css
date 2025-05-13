@@ -47,7 +47,7 @@
   }
   
   .session-button {
-    width: 200px;
+    width: 400px;
     background-color: #81c784;
     border: none;
     color: white;
@@ -61,5 +61,13 @@
   .session-button:hover {
     background-color: #388e3c;
     color: white;
+  }
+
+  .session-title {
+    color: darkslategray;
+  }
+
+  b {
+    color: darkgreen;
   }
   

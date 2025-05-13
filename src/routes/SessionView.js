@@ -32,7 +32,7 @@ function HelmetView() {
         Back to Helmet {helmetNo}
       </button>
       <h2 className="session-title">{sessionNo} Data</h2>
-      <ul className="session-data-list">
+      {value.size > 0 && <ul className="session-data-list">
         {value.docs.map((doc) => {
           const data = doc.data();
           const { accMag, gyroMag, severity, content, type } = data['res'];
@@ -43,9 +43,9 @@ function HelmetView() {
             <li
               key={doc.id}
               className={`session-data-item ${
-                severity === 'high'
+                severity === 'High'
                   ? 'severity-high'
-                  : severity === 'medium'
+                  : severity === 'Medium'
                   ? 'severity-medium'
                   : 'severity-low'
               } ${isExpanded ? 'expanded' : ''}`}
@@ -66,7 +66,8 @@ function HelmetView() {
             </li>
           );
         })}
-      </ul>
+      </ul> }
+        {value.size === 0 && <h2>No strikes recorded in this session</h2>}
     </div>
   );
 }

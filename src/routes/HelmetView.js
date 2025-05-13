@@ -49,7 +49,9 @@ function HelmetView() {
                     state: { helmetNo, sessionNo: doc.data().sessNo },
                     })
                 }>
-                {doc.data().sessNo}
+                <b className="session-title">{doc.data().sessNo}</b> <br />
+                <b>Hits Recorded: </b>{doc.data().totalHits} <br />
+                <b>Started: </b>{doc.data().date.toDate().toDateString()}
                 </button>
             ))}
 
