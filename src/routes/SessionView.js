@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { firestore } from './firebase';
 import React, { useState } from 'react';
-import { collection } from 'firebase/firestore';
+import { collection, query, orderBy } from 'firebase/firestore';
 import { useCollection } from 'react-firebase-hooks/firestore';
 
 import './style/session.css';
@@ -13,12 +13,12 @@ function HelmetView() {
 
   const [expandedId, setExpandedId] = useState(null); // track expanded item
 
-  const [value, loading, error] = useCollection(
-    collection(firestore, 'helmets', helmetNo, sessionNo),
-    {
-      snapshotListenOptions: { includeMetadataChanges: true },
-    }
-  );
+  const sessionsRef = collection(firestore, 'helmets', helmetNo, sessionNo);
+  const sessionsQuery = query(sessionsRef, orderBy('createdAt'));
+  
+  const [value, loading, error] = useCollection(sessionsQuery, {
+    snapshotListenOptions: { includeMetadataChanges: true },
+  });
 
   if (loading) return <p className="session-loading">Loading...</p>;
   if (error) return <p className="session-error">Error: {error.message}</p>;
